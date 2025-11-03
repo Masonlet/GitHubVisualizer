@@ -1,8 +1,13 @@
 from fetch.github_api import get_user_repos
 
-def main():
+def main() -> None:
   username = input("Enter GitHub username: ").strip()
-  repos = get_user_repos(username)
+  if not username:
+    print("Username cannot be empty.")
+    return
+
+  refresh = input("Refresh cache? (y/n, default: n): ").strip().lower() == 'y'
+  repos = get_user_repos(username, refresh)
 
   if not repos:
     print(f"No public repositories found for {username}.")
