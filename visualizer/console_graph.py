@@ -108,13 +108,14 @@ def display_contribution_graph(
   username:str, 
   repos:list[str], 
   refresh:bool=False, 
-  weeks:int=52
+  weeks:int=52,
+  token:str | None=None
 ) -> None:
   print(f"GitHub Contribution Graph for {username}\n")
     
   all_commits = []
   for repo in repos:
-    commits = get_repo_commits(username, repo, refresh)
+    commits = get_repo_commits(username, repo, refresh, token=token)
     all_commits.extend(commits)
    
   if not all_commits:

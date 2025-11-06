@@ -7,18 +7,18 @@ from utils.user_input import get_user_input
 
 def main() -> None:
   try:
-    username, refresh = get_user_input()
+    username, refresh, token = get_user_input()
   except ValueError as e:
     print(e)
     return
 
-  repos = get_user_repos(username, refresh)
+  repos = get_user_repos(username, refresh, token)
   if not repos:
     print(f"No public repositories found for {username}.")
     return
 
-  display_all_repos(username, repos, refresh)
-  display_contribution_graph(username, repos, refresh, weeks=52)
+  display_all_repos(username, repos, refresh, token=token)
+  display_contribution_graph(username, repos, refresh, weeks=52, token=token)
 
 if __name__ == "__main__":
   main()

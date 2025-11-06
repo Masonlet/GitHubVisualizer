@@ -1,7 +1,6 @@
 import requests
 import json
 from datetime import datetime
-
 from .cache_utils import get_cache_path, is_cache_valid, format_time
 
 def _load_from_cache(username:str) -> list[str] | None:
@@ -34,7 +33,7 @@ def _save_to_cache(username:str, repos:list):
     print(f"Could not save to cache: {e}")
 
 
-def get_user_repos(username:str, refresh:bool=False) -> list[str]:
+def get_user_repos(username:str, refresh:bool=False, token:str | None = None) -> list[str]:
   if not refresh:
     cached_repos = _load_from_cache(username)
     if cached_repos is not None:
@@ -43,8 +42,12 @@ def get_user_repos(username:str, refresh:bool=False) -> list[str]:
   print(f"Fetching repos from GitHub API for {username}")
   url = f"https://api.github.com/users/{username}/repos"
 
+  headers = {}
+  if token:
+    headers['Authorization'] = f'token {token}'
+
   try:
-    response = requests.get(url, timeout=10)
+    response = requests.get(url, headers=headers, timeout=10)
     response.raise_for_status()
     repos = response.json()
 

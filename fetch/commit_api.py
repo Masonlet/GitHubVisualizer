@@ -4,7 +4,7 @@ from datetime import datetime
 
 from .cache_utils import get_commit_cache_path, is_cache_valid
 
-def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=100) -> list[dict]:
+def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=100, token:str | None=None) -> list[dict]:
   cache_path = get_commit_cache_path(username, repo)
 
   if not refresh and is_cache_valid(cache_path):
@@ -17,11 +17,16 @@ def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=10
   print(f"Fetching commits from GitHub API for {repo}")
   all_commits = []
   page = 1
+
+  headers = {}
+  if token:
+    headers['Authorization'] = f'token {token}'
+
   while True:
     url = f"https://api.github.com/repos/{username}/{repo}/commits"
     params = {"per_page": per_page, "page":page}
     try:
-      response = requests.get(url, params=params, timeout=10)
+      response = requests.get(url, params=params, headers=headers, timeout=10)
       response.raise_for_status()
       commits = response.json()
       if not commits:

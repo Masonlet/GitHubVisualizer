@@ -13,9 +13,9 @@ def _display_repo_commits(repo:str, commits:list[dict]) -> None:
   else:
     print()
 
-def display_all_repos(username:str, repos:list[str], refresh:bool) -> None:
+def display_all_repos(username:str, repos:list[str], refresh:bool, token:str | None=None) -> None:
   print(f"Public repositories for {username}:")
   for repo in repos:
-    commits = get_repo_commits(username, repo, refresh)
+    commits = get_repo_commits(username, repo, refresh, token=token)
     _display_repo_commits(repo, commits)
 
