@@ -5,6 +5,22 @@ from datetime import datetime
 from .cache_utils import get_commit_cache_path, is_cache_valid
 
 def get_repo_commits(username: str, repo: str, refresh: bool = False, per_page: int = 100, token: str | None = None) -> list[dict]:
+  """
+  Fetch all commits for a repository.
+
+  Uses cached data if available and not expired (unless refresh=True).
+  Preserves partial data if error occurs.
+
+  Args:
+    username: GitHub username
+    repo: Repository name
+    refresh: If True, bypass cache and fetch fresh data
+    per_page: Number of commits per API request (max 100)
+    token: Optional GitHub personal access token
+
+  Returns:
+    List of commit dictionaries containing repo, message, and timestamp
+  """
   cache_path = get_commit_cache_path(username, repo)
 
   if not refresh and is_cache_valid(cache_path):

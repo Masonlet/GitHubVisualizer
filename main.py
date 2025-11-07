@@ -3,8 +3,13 @@ from fetch.repo_api import get_user_repos
 from visualizer.console_display import display_all_repos
 from visualizer.console_graph import display_contribution_graph
 
-
 def main() -> None:
+  """
+  Entry point for GitHub repository visualizer.
+
+  Prompts for username and configuration, 
+  then displays repository information and contribution graph.
+  """
   try: 
     username, refresh, token = get_user_input()
   except ValueError as e:

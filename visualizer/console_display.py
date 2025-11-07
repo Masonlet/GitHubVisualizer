@@ -19,6 +19,15 @@ def _display_repo_commits(repo: str, commits: list[dict]) -> None:
     print()
 
 def display_all_repos(username: str, repos: list[str], refresh: bool, token: str | None = None) -> None:
+  """
+  Display all repositories with commit previews.
+
+  Args:
+    username: GitHub username
+    repos: List of repository names
+    refresh: Whether to refresh cached commit data
+    token: Optional GitHub personal access token
+  """
   print(f"Public repositories for {username}:")
   for repo in repos:
     commits = get_repo_commits(username, repo, refresh, token=token)

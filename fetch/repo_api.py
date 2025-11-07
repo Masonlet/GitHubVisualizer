@@ -28,12 +28,25 @@ def _save_to_cache(username: str, repos: list):
   }
   try:
     with open(cache_path, 'w') as f:
-      json.dump(data, f, indent = 2)
+      json.dump(data, f, indent=2)
   except OSError as e:
     print(f"Could not save to cache: {e}")
 
 
 def get_user_repos(username: str, refresh: bool = False, token: str | None = None) -> list[str]:
+  """
+  Fetch list of public repositories for a GitHub user.
+
+  Uses cached data if available and not expired (unless refresh=True).
+
+  Args:
+    username: GitHub username to query
+    refresh: If True, bypass cache and fetch fresh data
+    token: Optional GitHub personal access token for higher rate limits
+
+  Returns:
+    List of repository names, or empty list if error occurs
+  """
   if not refresh:
     cached_repos = _load_from_cache(username)
     if cached_repos is not None:
@@ -47,7 +60,7 @@ def get_user_repos(username: str, refresh: bool = False, token: str | None = Non
     headers['Authorization'] = f'token {token}'
 
   try:
-    response = requests.get(url, headers = headers, timeout = 10)
+    response = requests.get(url, headers=headers, timeout=10)
     response.raise_for_status()
     repos = response.json()
 
@@ -61,7 +74,7 @@ def get_user_repos(username: str, refresh: bool = False, token: str | None = Non
     elif e.response.status_code == 403:
       print(f"Rate limit exceeded. Try using a personal access token.")
     else:
-      print(f"GitHub API erorr ({e.response.status_code}): {e}")
+      print(f"GitHub API error ({e.response.status_code}): {e}")
     return []
   except requests.Timeout:
     print(f"Request timed out while fetching repositories.")

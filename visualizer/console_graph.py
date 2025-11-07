@@ -111,8 +111,21 @@ def display_contribution_graph(
   weeks: int = 52,
   token: str | None = None
 ) -> None:
+  """
+  Display GitHub-style contribution graph for user's commits.
+
+  Shows a heatmap of commit activity over the specified time period,
+  with intensity levels indicating commit frequency.
+
+  Args:
+    username: GitHub username
+    repos: List of repository names to visualize
+    refresh: Whether to refresh cached commit data
+    weeks: Number of weeks to display (default: 52)
+    token: Optional GitHub personal access token
+  """
   print(f"GitHub Contribution Graph for {username}\n")
-    
+  
   all_commits = []
   for repo in repos:
     commits = get_repo_commits(username, repo, refresh, token=token)
