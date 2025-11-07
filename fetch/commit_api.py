@@ -4,7 +4,7 @@ from datetime import datetime
 
 from .cache_utils import get_commit_cache_path, is_cache_valid
 
-def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=100, token:str | None=None) -> list[dict]:
+def get_repo_commits(username: str, repo: str, refresh: bool = False, per_page: int = 100, token: str | None = None) -> list[dict]:
   cache_path = get_commit_cache_path(username, repo)
 
   if not refresh and is_cache_valid(cache_path):
@@ -24,7 +24,7 @@ def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=10
 
   while True:
     url = f"https://api.github.com/repos/{username}/{repo}/commits"
-    params = {"per_page": per_page, "page":page}
+    params = {"per_page": per_page, "page": page}
     try:
       response = requests.get(url, params=params, headers=headers, timeout=10)
       response.raise_for_status()
@@ -33,14 +33,16 @@ def get_repo_commits(username:str, repo:str, refresh:bool=False, per_page:int=10
         break
       for commit in commits:
         all_commits.append({
-          "repo":repo,
-          "message":commit["commit"]["message"],
-          "timestamp":commit["commit"]["author"]["date"],
+          "repo": repo,
+          "message": commit["commit"]["message"],
+          "timestamp": commit["commit"]["author"]["date"],
         })
       page += 1
     except requests.RequestException as e:
-      print(f"Error fetching commits for {repo}: {e}")
-      return []
+      print(f"Error fetching commits for {repo}: (page {page}): {e}")
+      if all_commits:
+        print(f"Returning {len(all_commits)} commits fetched before error")
+      break
 
   try:
     with open(cache_path, 'w') as f:

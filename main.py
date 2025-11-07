@@ -1,12 +1,11 @@
-from datetime import datetime
-
+from utils.user_input import get_user_input
 from fetch.repo_api import get_user_repos
 from visualizer.console_display import display_all_repos
 from visualizer.console_graph import display_contribution_graph
-from utils.user_input import get_user_input
+
 
 def main() -> None:
-  try:
+  try: 
     username, refresh, token = get_user_input()
   except ValueError as e:
     print(e)

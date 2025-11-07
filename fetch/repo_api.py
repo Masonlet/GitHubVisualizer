@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from .cache_utils import get_cache_path, is_cache_valid, format_time
 
-def _load_from_cache(username:str) -> list[str] | None:
+def _load_from_cache(username: str) -> list[str] | None:
   cache_path = get_cache_path(username)
   if not is_cache_valid(cache_path):
     return None
@@ -15,11 +15,11 @@ def _load_from_cache(username:str) -> list[str] | None:
       print(f"Loaded from cache (Cached {format_time(time_ago)})")
       return data['repos']
   except (json.JSONDecodeError, KeyError) as e:
-    print(f"Cache file corrupted, refreshing data ({e})")
+    print(f"Cache file corrupted, refreshing data")
     return None
 
 
-def _save_to_cache(username:str, repos:list):
+def _save_to_cache(username: str, repos: list):
   cache_path = get_cache_path(username)
   data = {
     'username': username,
@@ -28,12 +28,12 @@ def _save_to_cache(username:str, repos:list):
   }
   try:
     with open(cache_path, 'w') as f:
-      json.dump(data, f, indent=2)
+      json.dump(data, f, indent = 2)
   except OSError as e:
     print(f"Could not save to cache: {e}")
 
 
-def get_user_repos(username:str, refresh:bool=False, token:str | None = None) -> list[str]:
+def get_user_repos(username: str, refresh: bool = False, token: str | None = None) -> list[str]:
   if not refresh:
     cached_repos = _load_from_cache(username)
     if cached_repos is not None:
@@ -47,7 +47,7 @@ def get_user_repos(username:str, refresh:bool=False, token:str | None = None) ->
     headers['Authorization'] = f'token {token}'
 
   try:
-    response = requests.get(url, headers=headers, timeout=10)
+    response = requests.get(url, headers = headers, timeout = 10)
     response.raise_for_status()
     repos = response.json()
 
@@ -55,6 +55,20 @@ def get_user_repos(username:str, refresh:bool=False, token:str | None = None) ->
     _save_to_cache(username, repo_names)
     return repo_names
 
+  except requests.HTTPError as e:
+    if e.response.status_code == 404:
+      print(f"User '{username}' not found on GitHub.")
+    elif e.response.status_code == 403:
+      print(f"Rate limit exceeded. Try using a personal access token.")
+    else:
+      print(f"GitHub API erorr ({e.response.status_code}): {e}")
+    return []
+  except requests.Timeout:
+    print(f"Request timed out while fetching repositories.")
+    return []
+  except requests.ConnectionError:
+    print(f"Network error. Please check your internet connection and retry.")
+    return []
   except requests.RequestException as e:
-    print(f"Error fetching from GitHub: {e}")
+    print(f"Unexpected error: {e}")
     return []
