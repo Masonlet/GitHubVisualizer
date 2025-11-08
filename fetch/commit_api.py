@@ -1,10 +1,18 @@
 import json
-import requests
 from datetime import datetime
-
+import requests
+from config import DEFAULT_PER_PAGE, API_TIMEOUT
+from fetch.error_handler import handle_api_error
+from models import Commit
 from .cache_utils import get_commit_cache_path, is_cache_valid
 
-def get_repo_commits(username: str, repo: str, refresh: bool = False, per_page: int = 100, token: str | None = None) -> list[dict]:
+def get_repo_commits(
+  username: str, 
+  repo: str, 
+  refresh: bool = False, 
+  per_page: int = DEFAULT_PER_PAGE, 
+  token: str | None = None
+) -> list[Commit]:
   """
   Fetch all commits for a repository.
 
@@ -42,7 +50,7 @@ def get_repo_commits(username: str, repo: str, refresh: bool = False, per_page: 
     url = f"https://api.github.com/repos/{username}/{repo}/commits"
     params = {"per_page": per_page, "page": page}
     try:
-      response = requests.get(url, params=params, headers=headers, timeout=10)
+      response = requests.get(url, params=params, headers=headers, timeout=API_TIMEOUT)
       response.raise_for_status()
       commits = response.json()
       if not commits:
@@ -55,7 +63,7 @@ def get_repo_commits(username: str, repo: str, refresh: bool = False, per_page: 
         })
       page += 1
     except requests.RequestException as e:
-      print(f"Error fetching commits for {repo}: (page {page}): {e}")
+      handle_api_error(e, f"Fetching commits for {repo} (page {page})")
       if all_commits:
         print(f"Returning {len(all_commits)} commits fetched before error")
       break

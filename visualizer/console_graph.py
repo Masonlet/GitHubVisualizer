@@ -1,11 +1,8 @@
 from datetime import datetime, timedelta
 from collections import defaultdict
 from fetch.commit_api import get_repo_commits
-
-INTENSITY_CHARS = [' ', '░', '▒', '▓', '█']
-INTENSITY_LEVELS = [0, 1, 3, 6, 10]
-DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
+from config import INTENSITY_LEVELS, INTENSITY_CHARS, DAY_LABELS
+from models import Commit
 
 def _get_intensity_char(commit_count: int) -> str:
   for i in range(len(INTENSITY_LEVELS) - 1, -1, -1):
@@ -14,7 +11,7 @@ def _get_intensity_char(commit_count: int) -> str:
   return INTENSITY_CHARS[0]
 
 
-def _get_commit_dates(commits: list[dict]) -> dict[str, int]:
+def _get_commit_dates(commits: list[Commit]) -> dict[str, int]:
   date_counts = defaultdict(int)
   for commit in commits:
     try:

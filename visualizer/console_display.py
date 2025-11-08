@@ -1,11 +1,8 @@
 from fetch.commit_api import get_repo_commits
+from config import COMMIT_PREVIEW_COUNT, MESSAGE_PREVIEW_LENGTH
+from models import Commit
 
-
-COMMIT_PREVIEW_COUNT = 3
-MESSAGE_PREVIEW_LENGTH = 70
-
-
-def _display_repo_commits(repo: str, commits: list[dict]) -> None:
+def _display_repo_commits(repo: str, commits: list[Commit]) -> None:
   print(f" - {repo}: {len(commits)} commits")
   for commit in commits[:COMMIT_PREVIEW_COUNT]:
     message = commit["message"].split('\n')[0]
@@ -18,7 +15,12 @@ def _display_repo_commits(repo: str, commits: list[dict]) -> None:
   else:
     print()
 
-def display_all_repos(username: str, repos: list[str], refresh: bool, token: str | None = None) -> None:
+def display_all_repos(
+  username: str, 
+  repos: list[str], 
+  refresh: bool, 
+  token: str | None = None
+) -> None:
   """
   Display all repositories with commit previews.
 

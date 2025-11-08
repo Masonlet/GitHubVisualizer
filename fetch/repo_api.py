@@ -2,6 +2,8 @@ import requests
 import json
 from datetime import datetime
 from .cache_utils import get_cache_path, is_cache_valid, format_time
+from fetch.error_handler import handle_api_error
+from config import API_TIMEOUT
 
 def _load_from_cache(username: str) -> list[str] | None:
   cache_path = get_cache_path(username)
@@ -60,28 +62,12 @@ def get_user_repos(username: str, refresh: bool = False, token: str | None = Non
     headers['Authorization'] = f'token {token}'
 
   try:
-    response = requests.get(url, headers=headers, timeout=10)
+    response = requests.get(url, headers=headers, timeout=API_TIMEOUT)
     response.raise_for_status()
     repos = response.json()
-
     repo_names = [repo["name"] for repo in repos]
     _save_to_cache(username, repo_names)
     return repo_names
-
-  except requests.HTTPError as e:
-    if e.response.status_code == 404:
-      print(f"User '{username}' not found on GitHub.")
-    elif e.response.status_code == 403:
-      print(f"Rate limit exceeded. Try using a personal access token.")
-    else:
-      print(f"GitHub API error ({e.response.status_code}): {e}")
-    return []
-  except requests.Timeout:
-    print(f"Request timed out while fetching repositories.")
-    return []
-  except requests.ConnectionError:
-    print(f"Network error. Please check your internet connection and retry.")
-    return []
   except requests.RequestException as e:
-    print(f"Unexpected error: {e}")
+    handle_api_error(e, f"Fetching repos for {username}")
     return []

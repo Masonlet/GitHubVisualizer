@@ -1,11 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from pathlib import Path
-
-
-CACHE_DIR = Path(".github_cache")
-CACHE_DURATION = timedelta(hours=2)
- 
+from config import CACHE_DIR, CACHE_DURATION
 
 def get_cache_path(username: str) -> Path:
   CACHE_DIR.mkdir(exist_ok=True)
