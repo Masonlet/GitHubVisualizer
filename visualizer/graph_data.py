@@ -3,6 +3,12 @@ from collections import defaultdict
 from models import Commit
 from config import INTENSITY_CHARS, INTENSITY_LEVELS
 
+"""
+Data processing for contribution graphs.
+
+Handles commit date counting, grid creation, and intensity level calculations.
+"""
+
 def get_commit_dates(commits: list[Commit]) -> dict[str, int]:
   """
   Count commits by date.

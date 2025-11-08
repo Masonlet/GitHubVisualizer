@@ -1,5 +1,11 @@
 from datetime import timedelta 
 
+"""
+Time formatting utilities.
+
+Formats time differences into human-readable strings.
+"""
+
 def format_time(time_diff: timedelta) -> str:
   """
   Format a time difference as human-readable string.
@@ -11,6 +17,7 @@ def format_time(time_diff: timedelta) -> str:
     Human-readable time string
   """
   seconds = time_diff.total_seconds()
+  
   if seconds < 60:
     return "just now"
   elif seconds < 3600:

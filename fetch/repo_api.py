@@ -9,7 +9,22 @@ from fetch.cache.validation import is_cache_valid
 from fetch.cache.formatting import format_time
 from fetch.error_handler import handle_api_error
 
+"""
+GitHub repository API operations.
+
+Handles fetching and caching of user repository lists.
+"""
+
 def _load_from_cache(username: str) -> list[str] | None:
+  """
+  Load repository list from cache if valid.
+
+  Args:
+    username: GitHub username
+
+  Returns:
+    List of repository names if cache is valid, None otherwise
+  """
   cache_path = get_user_cache_path(username)
   if not is_cache_valid(cache_path):
     return None
@@ -26,6 +41,13 @@ def _load_from_cache(username: str) -> list[str] | None:
 
 
 def _save_to_cache(username: str, repos: list):
+  """
+  Save repository list to cache.
+
+  Args:
+    username: GitHub username
+    repos: List of repository names to cache
+  """
   cache_path = get_user_cache_path(username)
   data = {
     'username': username,

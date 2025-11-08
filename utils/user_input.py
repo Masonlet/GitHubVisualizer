@@ -1,3 +1,9 @@
+"""
+User input collection utilities.
+
+Handles interactive prompts for username, token, and configuration options.
+"""
+
 def get_user_input() -> tuple[str, bool, str | None]:
   """
   Collect user input for GitHub username and configuration.

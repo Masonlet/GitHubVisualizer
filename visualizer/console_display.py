@@ -3,6 +3,12 @@ from config import COMMIT_PREVIEW_COUNT
 from models import Commit
 from visualizer.message_formatter import format_commit_message
 
+"""
+Console display for repository information.
+
+Formats and displays repository lists with commit previews.
+"""
+
 def _display_repo_commits(repo: str, commits: list[Commit]) -> None:
   """
   Display commit information for a single repository.
@@ -41,4 +47,3 @@ def display_all_repos(
   for repo in repos:
     commits = get_repo_commits(username, repo, refresh, token=token)
     _display_repo_commits(repo, commits)
-

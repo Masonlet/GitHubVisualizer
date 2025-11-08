@@ -2,6 +2,11 @@ from datetime import datetime
 from config import DAY_LABELS, INTENSITY_CHARS
 from visualizer.graph_data import get_intensity_char
 
+"""
+Rendering logic for contribution graphs.
+
+Handles all terminal output formatting for the contribution graph visualization.
+"""
 
 def print_month_labels(grid: list[list[tuple[str, int]]]) -> None:
   """
@@ -71,4 +76,3 @@ def print_stats(commit_dates: dict[str, int], weeks: int) -> None:
   print(f"  Active days: {active_days}")
   if active_days > 0:
     print(f"  Average commits per active day: {total_commits / active_days:.1f}")
-

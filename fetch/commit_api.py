@@ -9,6 +9,12 @@ from fetch.cache.validation import is_cache_valid
 from fetch.error_handler import handle_api_error
 from models import Commit
 
+"""
+GitHub commit API operations.
+
+Handles fetching and caching of repository commit history.
+"""
+
 def get_repo_commits(
   username: str, 
   repo: str, 

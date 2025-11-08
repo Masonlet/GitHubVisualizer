@@ -11,6 +11,12 @@ from visualizer.graph_renderer import (
   print_stats
 )
 
+"""
+GitHub-style contribution graph visualization.
+
+Manages the creation and display of a contribution heatmap similar to GitHub's profile page.
+"""
+
 def display_contribution_graph(
   username: str, 
   repos: list[str], 

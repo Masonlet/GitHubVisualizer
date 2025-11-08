@@ -2,6 +2,12 @@ from datetime import datetime
 from pathlib import Path
 from config import CACHE_DURATION
 
+"""
+Cache validation utilities.
+
+Checks cache file validity based on existence and expiration time.
+"""
+
 def is_cache_valid(cache_path: Path) -> bool:
   """
   Check if cache file exists and is not expired.

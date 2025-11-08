@@ -1,5 +1,7 @@
 import requests
 
+"""Centralized error handling for API requests."""
+
 def handle_api_error(error: requests.RequestException, context: str) -> None:
   """
   Centralized error handling for API requests.
