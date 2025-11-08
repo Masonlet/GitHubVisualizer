@@ -1,10 +1,13 @@
 import json
 from datetime import datetime
+
 import requests
+
 from config import DEFAULT_PER_PAGE, API_TIMEOUT
+from fetch.cache.paths import get_commit_cache_path
+from fetch.cache.validation import is_cache_valid
 from fetch.error_handler import handle_api_error
 from models import Commit
-from .cache_utils import get_commit_cache_path, is_cache_valid
 
 def get_repo_commits(
   username: str, 

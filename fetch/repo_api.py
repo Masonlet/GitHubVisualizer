@@ -1,12 +1,16 @@
-import requests
 import json
 from datetime import datetime
-from .cache_utils import get_cache_path, is_cache_valid, format_time
-from fetch.error_handler import handle_api_error
+
+import requests
+
 from config import API_TIMEOUT
+from fetch.cache.paths import get_user_cache_path
+from fetch.cache.validation import is_cache_valid
+from fetch.cache.formatting import format_time
+from fetch.error_handler import handle_api_error
 
 def _load_from_cache(username: str) -> list[str] | None:
-  cache_path = get_cache_path(username)
+  cache_path = get_user_cache_path(username)
   if not is_cache_valid(cache_path):
     return None
   try:
@@ -22,7 +26,7 @@ def _load_from_cache(username: str) -> list[str] | None:
 
 
 def _save_to_cache(username: str, repos: list):
-  cache_path = get_cache_path(username)
+  cache_path = get_user_cache_path(username)
   data = {
     'username': username,
     'repos': repos,

@@ -1,18 +1,25 @@
 from fetch.commit_api import get_repo_commits
-from config import COMMIT_PREVIEW_COUNT, MESSAGE_PREVIEW_LENGTH
+from config import COMMIT_PREVIEW_COUNT
 from models import Commit
+from visualizer.message_formatter import format_commit_message
 
 def _display_repo_commits(repo: str, commits: list[Commit]) -> None:
+  """
+  Display commit information for a single repository.
+
+  Args:
+    repo: Repository name
+    commits: List of commits for the repository
+  """
   print(f" - {repo}: {len(commits)} commits")
+
   for commit in commits[:COMMIT_PREVIEW_COUNT]:
-    message = commit["message"].split('\n')[0]
-    if message:
-      print(f"  - {message[:MESSAGE_PREVIEW_LENGTH]}")
-    else:
-      print(f"  - (no commit message)")
-  if len(commits) > COMMIT_PREVIEW_COUNT:
-    print(f"  - {len(commits) - COMMIT_PREVIEW_COUNT} more commits\n")
-  else:
+    print(f"  - {format_commit_message(commit["message"])}")
+
+  remaining = len(commits) - COMMIT_PREVIEW_COUNT
+  if remaining > 0: 
+    print(f"  - {remaining} more commits\n")
+  else: 
     print()
 
 def display_all_repos(
