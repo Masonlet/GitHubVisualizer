@@ -1,6 +1,6 @@
-# GitHubVisualizer
+# GitHub Visualizer
 
-GitHubVisualizer is a Python utility for exploring and visualizing activity in GitHub repositories. 
+GitHub Visualizer is a Python utility for exploring and visualizing activity in GitHub repositories. 
 
 ## Features
 
@@ -9,7 +9,24 @@ GitHubVisualizer is a Python utility for exploring and visualizing activity in G
 - **Smart Caching**: Automatic caching with 2-hour expiration to minimize API calls
 - **Token Support**: Optional GitHub personal access token for higher rate limits
 
+## Prerequisites
+
+- Python 3.10 or higher
+- pip (Python package manager) 
+
 ## Usage
+
+### Interactive Mode
+
+Run the program without arguments and follow the prompts:
+```bash
+python main.py
+```
+
+You'll be prompted for:
+- **GitHub username**: The user whose repositories you want to visualize
+- **Refresh cache**: Whether to bypass cached data (y/n)
+- **Access token**: Optional GitHub personal access token for higher rate limits
 
 ### Command-Line Mode
 
@@ -36,29 +53,12 @@ python main.py Masonlet --no-list
 python main.py Masonlet --token ghp_xxxxx --refresh --weeks 26
 ```
 
-### Interactive Mode
-
-Run the program without arguments and follow the prompts:
-```bash
-python main.py
-```
-
-You'll be prompted for:
-- **GitHub username**: The user whose repositories you want to visualize
-- **Refresh cache**: Whether to bypass cached data (y/n)
-- **Access token**: Optional GitHub personal access token for higher rate limits
-
-## Prerequisites
-
-- Python 3.10 or higher
-- pip (Python package manager) 
-
 ## Building the Project
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Masonlet/GitHubVisualizer.git
-cd GitHubVisualizer
+git clone https://github.com/masonlet/github-visualizer.git
+cd github-visualizer
 ```
 
 ### 2. Install required dependencies
