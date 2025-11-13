@@ -1,12 +1,12 @@
-from datetime import datetime
-from config import DAY_LABELS, INTENSITY_CHARS
-from visualizer.graph_data import get_intensity_char
-
 """
 Rendering logic for contribution graphs.
 
 Handles all terminal output formatting for the contribution graph visualization.
 """
+
+from datetime import datetime
+from ..config import DAY_LABELS, INTENSITY_CHARS
+from ..visualizer.graph_data import get_intensity_char
 
 def print_month_labels(grid: list[list[tuple[str, int]]]) -> None:
   """

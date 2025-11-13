@@ -1,9 +1,10 @@
-import sys
-from utils.user_input import get_user_input
-from fetch.repo_api import get_user_repos
-from visualizer.console_display import display_all_repos
-from visualizer.console_graph import display_contribution_graph
-from cli import parse_args
+"""GitHub Visualizer - Explore and visualize GitHub activity"""
+
+from .cli import parse_args
+from .utils.user_input import get_user_input
+from .fetch.repo_api import get_user_repos
+from .visualizer.console_display import display_all_repos
+from .visualizer.console_graph import display_contribution_graph
 
 def main() -> None:
   """

@@ -1,6 +1,6 @@
-import requests
-
 """Centralized error handling for API requests."""
+
+import requests
 
 def handle_api_error(error: requests.RequestException, context: str) -> None:
   """

@@ -1,6 +1,6 @@
-from typing import TypedDict
-
 """Type definitions for GitHub visualizer."""
+
+from typing import TypedDict
 
 class Commit(TypedDict):
   repo: str

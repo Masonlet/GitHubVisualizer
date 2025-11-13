@@ -1,19 +1,16 @@
-import json
-from datetime import datetime
-
-import requests
-
-from config import DEFAULT_PER_PAGE, API_TIMEOUT
-from fetch.cache.paths import get_commit_cache_path
-from fetch.cache.validation import is_cache_valid
-from fetch.error_handler import handle_api_error
-from models import Commit
-
 """
 GitHub commit API operations.
 
 Handles fetching and caching of repository commit history.
 """
+
+import json
+import requests
+from ..config import DEFAULT_PER_PAGE, API_TIMEOUT
+from ..models import Commit
+from .cache.paths import get_commit_cache_path
+from .cache.validation import is_cache_valid
+from .error_handler import handle_api_error
 
 def get_repo_commits(
   username: str, 

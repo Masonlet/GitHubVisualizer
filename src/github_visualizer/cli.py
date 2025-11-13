@@ -1,11 +1,11 @@
-import argparse
-from config import DEFAULT_WEEKS
-
 """
 Command-line argument parsing.
 
 Handles CLI arguments for non-interactive usage.
 """
+
+import argparse
+from .config import DEFAULT_WEEKS
 
 def parse_args():
   """

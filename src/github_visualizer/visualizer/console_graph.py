@@ -1,21 +1,21 @@
-from fetch.commit_api import get_repo_commits
-from visualizer.graph_data import (
-  get_commit_dates,
-  create_week_grid,
-  populate_grid
-)
-from visualizer.graph_renderer import (
-  print_month_labels,
-  print_graph_grid,
-  print_legend,
-  print_stats
-)
-
 """
 GitHub-style contribution graph visualization.
 
 Manages the creation and display of a contribution heatmap similar to GitHub's profile page.
 """
+
+from ..fetch.commit_api import get_repo_commits
+from .graph_data import (
+  get_commit_dates,
+  create_week_grid,
+  populate_grid
+)
+from .graph_renderer import (
+  print_month_labels,
+  print_graph_grid,
+  print_legend,
+  print_stats
+)
 
 def display_contribution_graph(
   username: str, 

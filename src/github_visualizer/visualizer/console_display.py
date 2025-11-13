@@ -1,13 +1,13 @@
-from fetch.commit_api import get_repo_commits
-from config import COMMIT_PREVIEW_COUNT
-from models import Commit
-from visualizer.message_formatter import format_commit_message
-
 """
 Console display for repository information.
 
 Formats and displays repository lists with commit previews.
 """
+
+from ..fetch.commit_api import get_repo_commits
+from ..config import COMMIT_PREVIEW_COUNT
+from ..models import Commit
+from .message_formatter import format_commit_message
 
 def _display_repo_commits(repo: str, commits: list[Commit]) -> None:
   """

@@ -1,12 +1,12 @@
-from datetime import timedelta
-from pathlib import Path
-
 """
 Configuration constants for GitHub Visualizer.
 
 Contains all configurable settings including cache duration,
 API timeouts, display preferences, and graph visualization settings.
 """
+
+from datetime import timedelta
+from pathlib import Path
 
 # Cache Settings
 CACHE_DIR = Path(".github_cache")

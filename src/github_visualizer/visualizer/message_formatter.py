@@ -1,10 +1,10 @@
-from config import MESSAGE_PREVIEW_LENGTH
-
 """
 Commit message formatting utilities.
 
 Formats commit messages for display in terminal output.
 """
+
+from ..config import MESSAGE_PREVIEW_LENGTH
 
 def format_commit_message(
   message: str, 

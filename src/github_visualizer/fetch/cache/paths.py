@@ -1,12 +1,12 @@
-from pathlib import Path
-from config import CACHE_DIR
-
 """
 Cache file path management.
 
 Provides functions for generating and managing 
 cache file paths for users and repositories.
 """
+
+from pathlib import Path
+from ...config import CACHE_DIR
 
 def get_user_cache_path(username: str) -> Path:
   """

@@ -1,13 +1,13 @@
-from datetime import datetime, timedelta
-from collections import defaultdict
-from models import Commit
-from config import INTENSITY_CHARS, INTENSITY_LEVELS
-
 """
 Data processing for contribution graphs.
 
 Handles commit date counting, grid creation, and intensity level calculations.
 """
+
+from datetime import datetime, timedelta
+from collections import defaultdict
+from ..models import Commit
+from ..config import INTENSITY_CHARS, INTENSITY_LEVELS
 
 def get_commit_dates(commits: list[Commit]) -> dict[str, int]:
   """

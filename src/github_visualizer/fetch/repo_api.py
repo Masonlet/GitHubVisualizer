@@ -1,19 +1,17 @@
-import json
-from datetime import datetime
-
-import requests
-
-from config import API_TIMEOUT
-from fetch.cache.paths import get_user_cache_path
-from fetch.cache.validation import is_cache_valid
-from fetch.cache.formatting import format_time
-from fetch.error_handler import handle_api_error
-
 """
 GitHub repository API operations.
 
 Handles fetching and caching of user repository lists.
 """
+
+import json
+from datetime import datetime
+import requests
+from ..config import API_TIMEOUT
+from .cache.paths import get_user_cache_path
+from .cache.validation import is_cache_valid
+from .cache.formatting import format_time
+from .error_handler import handle_api_error
 
 def _load_from_cache(username: str) -> list[str] | None:
   """

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+  
+[project]
+name = "github-visualizer"
+version = "1.0.0"
+description = "Explore and visualize GitHub activity"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text= "MIT"}
+authors = [
+  {name = "Mason L'Etoile", email = "masonletoile@hotmail.com"}
+]
+dependencies = [
+  "requests>=2.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/masonlet/github-visualizer"
+
+[project.scripts]
+github-visualizer = "github_visualizer.__main__:main"
