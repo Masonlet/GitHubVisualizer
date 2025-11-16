@@ -1,8 +1,8 @@
 # GitHub Visualizer
-GitHub Visualizer is a Python utility for exploring and visualizing activity in GitHub repositories. 
-
+![Tests](https://github.com/masonlet/github-visualizer/actions/workflows/test.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6%2B-blue.svg)]()
+GitHub Visualizer is a Python utility for exploring and visualizing activity in GitHub repositories. 
 
 ## Table of Contents
 - [Features](#features)
@@ -17,6 +17,8 @@ GitHub Visualizer is a Python utility for exploring and visualizing activity in 
 
 <br/> 
 
+
+
 ## Features
 - **Repository Overview**: List all repositories for a user with commit previews
 - **Contribution Graph**: GitHub-style heatmap showing commit activity over time
@@ -24,6 +26,8 @@ GitHub Visualizer is a Python utility for exploring and visualizing activity in 
 - **Token Support**: Optional GitHub personal access token for higher rate limits
 
 <br/>
+
+
 
 ## Prerequisites
 - Python 3.6 or higher
@@ -36,14 +40,9 @@ GitHub Visualizer is a Python utility for exploring and visualizing activity in 
 pip install git+https://github.com/masonlet/github-visualizer.git
 ```
 
-### From Source
-```bash
-git clone https://github.com/masonlet/github-visualizer.git
-cd github-visualizer
-pip install -e .
-```
-
 <br/>
+
+
 
 ## Usage
 
@@ -92,8 +91,10 @@ github-visualizer masonlet --token ghp_xxxxx --refresh --weeks 26
 
 <br/>
 
-## Building the Project
-### 1. Clone the Repository
+
+
+## Running Tests
+### 1. Clone github-visualizer
 ```bash
 git clone https://github.com/masonlet/github-visualizer.git
 cd github-visualizer
@@ -104,12 +105,21 @@ cd github-visualizer
 pip install -e .
 ```
 
-### 3. Run the Tool
+### 3. Run Tests
 ```bash
-github-visualizer
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_commit_api.py
+
+# Run tests with flags
+pytest -V
 ```
 
 <br/>
+
+
 
 ## License
 MIT License — see [LICENSE](./LICENSE) for details.
