@@ -1,7 +1,8 @@
 # GitHub Visualizer
 ![Tests](https://github.com/masonlet/github-visualizer/actions/workflows/test.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Python 3.6+](https://img.shields.io/badge/python-3.6%2B-blue.svg)]()
+[![Python 3.6+](https://img.shields.io/badge/python-3.6%2B-blue.svg)]()   
+
 GitHub Visualizer is a Python utility for exploring and visualizing activity in GitHub repositories. 
 
 ## Table of Contents
@@ -12,7 +13,7 @@ GitHub Visualizer is a Python utility for exploring and visualizing activity in 
   - [Interactive Mode](#interactive-mode)
   - [Command-Line Mode](#command-line-mode)
   - [Command-Line Options](#command-line-options)
-- [Building the Project](#building-the-project)
+- [Running tests](#running-tests)
 - [License](#license)
 
 <br/> 
