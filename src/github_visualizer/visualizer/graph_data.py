@@ -57,7 +57,7 @@ def create_week_grid(weeks: int = 52) -> list[list[tuple[str, int]]]:
   today = datetime.now().date()
   days_since_sunday = (today.weekday() + 1) % 7
   end_date = today - timedelta(days=days_since_sunday)
-  start_date = end_date - timedelta(weeks=weeks - 1)
+  start_date = end_date - timedelta(weeks=weeks) + timedelta(days=1)
 
   grid = [[] for _ in range(7)]
   current_date = start_date
